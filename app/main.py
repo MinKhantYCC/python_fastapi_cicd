@@ -1,7 +1,4 @@
 from fastapi import FastAPI, Response, status, HTTPException
-import psycopg2
-import time
-from psycopg2.extras import RealDictCursor
 from . import model, schemas
 from .database import get_db, engine
 from sqlalchemy.orm import Session
