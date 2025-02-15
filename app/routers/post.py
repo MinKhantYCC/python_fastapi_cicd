@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from fastapi import Depends
 from ..database import get_db
 from typing import List
+from .. import oauth2
 
 router = APIRouter(
     prefix="/posts",
@@ -19,7 +20,7 @@ def get_posts(db: Session = Depends(get_db)):
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)
-def create_post(payload: schemas.PostBase, db:Session=Depends(get_db)):
+def create_post(payload: schemas.PostBase, db:Session=Depends(get_db), get_current_user: int=Depends(oauth2.get_current_user)):
     """create a new post."""
 
     new_post = model.Post(**payload.model_dump())

@@ -4,7 +4,7 @@ from .database import engine
 from sqlalchemy.orm import Session
 from fastapi import Depends
 from typing import List
-from .routers import post, user
+from .routers import post, user, auth
 
 model.Base.metadata.create_all(bind=engine)
 
@@ -12,6 +12,7 @@ app = FastAPI()
 
 app.include_router(post.router)
 app.include_router(user.router)
+app.include_router(auth.router)
 
 ## routes
 @app.get("/")
